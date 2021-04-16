@@ -5,3 +5,11 @@ export PVM_SRC=$HOME/pvm3/src
 export PATH=$PATH:$PVM_ROOT/bin:$PVM_ROOT/lib:$PVM_HOME
 export XPVM_ROOT=/usr/bin/xpvm
 export PVM_RSH=`which ssh`
+
+mkdir -p $PVM_PATH
+
+gcc master.c -o master -lpvm3
+gcc slave.c -o slave -lpvm3
+cp master slave $PVM_PATH
+pvm
+spawn master
