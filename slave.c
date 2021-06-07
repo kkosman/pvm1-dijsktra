@@ -34,9 +34,9 @@ int main() {
 	pvm_upkint(&pid, 1, 1);
 	pvm_upkint(dist, V, 1);
 	pvm_upkint(sptSet, V, 1);
-	for(int x=0; x<V ; x++) {
-		printf("Slave: otrzymalem %d %d\n", dist[x], sptSet[x]);
-	}	
+	// for(int x=0; x<V ; x++) {
+	// 	printf("Slave: otrzymalem %d %d\n", dist[x], sptSet[x]);
+	// }	
 
 
 	// Pick the minimum distance vertex from the set of vertices not 

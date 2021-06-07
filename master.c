@@ -44,7 +44,7 @@ void dijkstra(int src)
 		pvm_pkint(dist, V, 1);
 		pvm_pkint(sptSet, V, 1);
 		pvm_send(tids[procx],MSG_MSTR);
-		// printf("Send: %d \n", procx);
+		printf("Send: %d \n", procx);
 		if((procx++) == nproc) procx = 0;
 
 
@@ -67,6 +67,7 @@ void dijkstra(int src)
 } 
 
 int main() {
+	printf("Start");
 	nproc = pvm_spawn(SLAVENAME, NULL, PvmTaskDefault, "", SLAVENUM, tids);
 	pid = pvm_mytid();
 
