@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include "./const.h"
+#include <time.h>
 
 int tids[SLAVENUM];
 int nproc;
@@ -44,7 +45,7 @@ void dijkstra(int src)
 		pvm_pkint(dist, V, 1);
 		pvm_pkint(sptSet, V, 1);
 		pvm_send(tids[procx],MSG_MSTR);
-		printf("Send: %d \n", procx);
+		// printf("Send: %d \n", procx);
 		if((procx++) == nproc) procx = 0;
 
 
@@ -56,9 +57,9 @@ void dijkstra(int src)
 		pvm_upkint(dist, V, 1);
 		pvm_upkint(sptSet, V, 1);
 
-		for(int x=0; x<V ; x++) {
-			printf("Master: otrzymalem %d %d\n", dist[x], sptSet[x]);
-		}
+		// for(int x=0; x<V ; x++) {
+		// 	printf("Master: otrzymalem %d %d\n", dist[x], sptSet[x]);
+		// }
 
 	} 
 
@@ -67,13 +68,24 @@ void dijkstra(int src)
 } 
 
 int main() {
-	printf("Start");
-	nproc = pvm_spawn(SLAVENAME, NULL, PvmTaskDefault, "", SLAVENUM, tids);
+
+	clock_t begin = clock();
+
 	pid = pvm_mytid();
 
+	nproc = pvm_spawn(SLAVENAME, NULL, PvmTaskDefault, "", SLAVENUM, tids);
+
+
+	
 	dijkstra(0); 
 
 
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	printf ("Execution time %f seconds.\n", time_spent );
 
 	pvm_exit();
+
+
+
 }

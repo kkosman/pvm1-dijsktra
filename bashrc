@@ -6,6 +6,8 @@ export PATH=$PATH:$PVM_ROOT/bin:$PVM_ROOT/lib:$PVM_HOME
 export XPVM_ROOT=/usr/bin/xpvm
 export PVM_RSH=`which ssh`
 
+printf "%s\n%s\n" conf quit|${PVM_ROOT}/lib/pvm machines.conf
+
 mkdir -p $PVM_PATH
 
 gcc master.c -o master -lpvm3

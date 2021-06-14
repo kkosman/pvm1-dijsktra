@@ -23,8 +23,11 @@ int minDistance(int dist[], int sptSet[])
 
 int main() {
 	int pid;
+	int mytid;
 	int dist[V];
 	int sptSet[V];
+
+	mytid = pvm_mytid() ;
 
 	int i = pvm_recv(-1, MSG_MSTR);
 	if( i < 0 ) {
@@ -57,9 +60,9 @@ int main() {
 			dist[v] = dist[u] + GRAPH[u][v]; 
 
 
-	for(int x=0; x<V ; x++) {
-		printf("Slave: wynik %d %d\n", dist[x], sptSet[x]);
-	}
+	// for(int x=0; x<V ; x++) {
+	// 	printf("Slave: wynik %d %d\n", dist[x], sptSet[x]);
+	// }
 	pvm_initsend(PvmDataDefault);
 	pvm_pkint(dist, V, 1);
 	pvm_pkint(sptSet, V, 1);
